@@ -1,0 +1,22 @@
+.header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    background-color: dodgerblue;
+
+    margin-bottom: 10px;
+}
+
+.header__logo {
+    width: 50px;
+    height: auto;
+
+    margin: 5px 20px;
+}
+
+.header__login {
+    display: block;
+    font-size: 20px;
+    color: white;
+
+    margin: 10px 30px;
+}
