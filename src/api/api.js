@@ -45,12 +45,13 @@ export const authAPI = {
     getAuthUser () {
         return instance.get('auth/me')
                 .then(response => response.data)
-    }
-}
-
-export const loginAPI = {
+    },
     login (email, password, rememberMe = false, captcha) {
         return instance.post(`auth/login`,{email, password, rememberMe, captcha})
+            .then(response => response.data)
+    },
+    logout () {
+        return instance.delete(`auth/login`)
             .then(response => response.data)
     }
 }
