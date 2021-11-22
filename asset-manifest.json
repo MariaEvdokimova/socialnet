@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/socialnet/static/css/main.60c5970a.chunk.css",
+    "main.js": "/socialnet/static/js/main.ea786754.chunk.js",
+    "main.js.map": "/socialnet/static/js/main.ea786754.chunk.js.map",
+    "runtime-main.js": "/socialnet/static/js/runtime-main.2ac55eb3.js",
+    "runtime-main.js.map": "/socialnet/static/js/runtime-main.2ac55eb3.js.map",
+    "static/js/2.e73f7473.chunk.js": "/socialnet/static/js/2.e73f7473.chunk.js",
+    "static/js/2.e73f7473.chunk.js.map": "/socialnet/static/js/2.e73f7473.chunk.js.map",
+    "static/css/3.b12863d0.chunk.css": "/socialnet/static/css/3.b12863d0.chunk.css",
+    "static/js/3.54493dd9.chunk.js": "/socialnet/static/js/3.54493dd9.chunk.js",
+    "static/js/3.54493dd9.chunk.js.map": "/socialnet/static/js/3.54493dd9.chunk.js.map",
+    "static/css/4.aa847328.chunk.css": "/socialnet/static/css/4.aa847328.chunk.css",
+    "static/js/4.dbb52288.chunk.js": "/socialnet/static/js/4.dbb52288.chunk.js",
+    "static/js/4.dbb52288.chunk.js.map": "/socialnet/static/js/4.dbb52288.chunk.js.map",
+    "index.html": "/socialnet/index.html",
+    "static/css/3.b12863d0.chunk.css.map": "/socialnet/static/css/3.b12863d0.chunk.css.map",
+    "static/css/4.aa847328.chunk.css.map": "/socialnet/static/css/4.aa847328.chunk.css.map",
+    "static/css/main.60c5970a.chunk.css.map": "/socialnet/static/css/main.60c5970a.chunk.css.map",
+    "static/js/2.e73f7473.chunk.js.LICENSE.txt": "/socialnet/static/js/2.e73f7473.chunk.js.LICENSE.txt",
+    "static/media/Instagram.53ab697a.png": "/socialnet/static/media/Instagram.53ab697a.png",
+    "static/media/Twitter.6f7b8e0b.png": "/socialnet/static/media/Twitter.6f7b8e0b.png",
+    "static/media/avatar_snoopy.e96926d3.png": "/socialnet/static/media/avatar_snoopy.e96926d3.png",
+    "static/media/github.f85f62e3.png": "/socialnet/static/media/github.f85f62e3.png",
+    "static/media/looking-for-a-job.30660810.png": "/socialnet/static/media/looking-for-a-job.30660810.png",
+    "static/media/main link.b06d2b7b.png": "/socialnet/static/media/main link.b06d2b7b.png",
+    "static/media/pic.cddc5882.jpg": "/socialnet/static/media/pic.cddc5882.jpg",
+    "static/media/pngegg.f1af3d71.png": "/socialnet/static/media/pngegg.f1af3d71.png",
+    "static/media/preloader.643ca93f.gif": "/socialnet/static/media/preloader.643ca93f.gif",
+    "static/media/website.19d2fd15.png": "/socialnet/static/media/website.19d2fd15.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2ac55eb3.js",
+    "static/js/2.e73f7473.chunk.js",
+    "static/css/main.60c5970a.chunk.css",
+    "static/js/main.ea786754.chunk.js"
+  ]
+}
