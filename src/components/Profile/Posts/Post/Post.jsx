@@ -12,7 +12,7 @@ const Post = (props) => {
                 </div>
             </li>
         )
-    })
+    }).reverse()
 };
 
 export default Post;
