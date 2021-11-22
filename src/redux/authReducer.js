@@ -26,36 +26,33 @@ const authReducer = (state = initialState, action) => {
 export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, payload: {userId, email, login, isAuth}});
 
 export const getAuthUser = () => {
-    return (dispatch) => {
-        return authAPI.getAuthUser().then(data => {
-            if(data.resultCode === 0) {
-                const {id, email, login} = data.data;
-                dispatch(setAuthUserData(id, email, login, true));
-            }
-        })
+    return async (dispatch) => {
+        const data = await authAPI.getAuthUser();
+        if (data.resultCode === 0) {
+            const {id, email, login} = data.data;
+            dispatch(setAuthUserData(id, email, login, true));
+        }
     }
 };
 
 export const login = (email, password, rememberMe, captcha) => {
-    return (dispatch) => {
-        authAPI.login(email, password, rememberMe, captcha).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(getAuthUser());
-            } else {
-                let loginError = data.messages.length > 0 ? data.messages[0] : 'Some error';
-                dispatch(stopSubmit('Login', {_error: loginError}));
-            }
-        })
+    return async (dispatch) => {
+        const data = await authAPI.login(email, password, rememberMe, captcha);
+        if (data.resultCode === 0) {
+            dispatch(getAuthUser());
+        } else {
+            let loginError = data.messages.length > 0 ? data.messages[0] : 'Some error';
+            dispatch(stopSubmit('Login', {_error: loginError}));
+        }
     }
 };
 
 export const logout = () => {
-    return (dispatch) => {
-        authAPI.logout().then(data => {
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null, false));
-            }
-        });
+    return async (dispatch) => {
+        const data = await authAPI.logout();
+        if (data.resultCode === 0) {
+            dispatch(setAuthUserData(null, null, null, false));
+        }
     }
 }
 

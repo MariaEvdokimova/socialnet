@@ -12,14 +12,16 @@ const ProfileInfoContacts = (props) => {
 
     const links = {facebook, website, vk, twitter, instagram, youtube, github, mainLink};
     const contacts = props.contacts;
+    let counter = 1;
 
     return Object.keys(contacts).map(key => {
-            return <a href={contacts[key]}>
-                {
-                    contacts[key] && <img src={links[key]} alt='link' width='30px'/>
-                }
-            </a>
-        })
+        counter++;
+        return <a key={counter} href={contacts[key]}>
+            {
+                contacts[key] && <img src={links[key]} alt='link' width='30px'/>
+            }
+        </a>
+    })
 }
 
 export default ProfileInfoContacts;
