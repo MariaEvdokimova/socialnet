@@ -7,13 +7,18 @@
 
 .profile__wrapper {
     display: flex;
+    margin-bottom: 30px;
+}
+
+.profile__avatar_wrapper {
+    margin: -110px 0 0 20px;
+
 }
 
 .profile__avatar {
     border: 3px solid #fff;
     border-radius: 50%;
 
-    margin: -110px 0 0 20px;
     width: 220px;
 }
 
@@ -29,4 +34,8 @@
     font-size: 15px;
 
     margin-bottom: 10px;
+}
+
+.profile__job_desc {
+    padding-left: 30px;
 }

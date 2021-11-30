@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styles from "./Pagination.module.css";
+import cn from 'classnames';
 
 const Pagination = ({totalItems, pageSize, currentPage, portionSize, onPageChange}) => {
 
@@ -23,7 +24,7 @@ const Pagination = ({totalItems, pageSize, currentPage, portionSize, onPageChang
                 .filter(page => page >= leftPortionPageNumber && page <= rightPotionPageNumber )
                 .map((page) => {
                 return <span key={page}
-                    className={currentPage === page ? styles.users_page__selected : ''}
+                    className={cn({[styles.users_page__selected]: currentPage === page})}
                     onClick={() => {
                         onPageChange(page)
                     }}>

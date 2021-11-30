@@ -8,17 +8,14 @@ import instagram from '../../../../assets/images/Instagram.png';
 import github from '../../../../assets/images/github.png';
 import mainLink from '../../../../assets/images/main link.png';
 
-const ProfileInfoContacts = (props) => {
+const ProfileInfoContacts = ({contacts}) => {
 
-    const links = {facebook, website, vk, twitter, instagram, youtube, github, mainLink};
-    const contacts = props.contacts;
-    let counter = 1;
+    const linksImg = {facebook, website, vk, twitter, instagram, youtube, github, mainLink};
 
     return Object.keys(contacts).map(key => {
-        counter++;
-        return <a key={counter} href={contacts[key]}>
+        return <a key={key} href={contacts[key]}>
             {
-                contacts[key] && <img src={links[key]} alt='link' width='30px'/>
+                contacts[key] && <img src={linksImg[key]} alt='link' width='30px'/>
             }
         </a>
     })

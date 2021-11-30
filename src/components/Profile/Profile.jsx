@@ -9,7 +9,11 @@ export const Profile = (props) => {
                          isOwner={props.isOwner}
                          profile={props.profile}
                          status={props.status}
-                         updateUserStatus={props.updateUserStatus}/>
+                         updateUserStatus={props.updateUserStatus}
+                         saveProfileData={props.saveProfileData}
+                         isProfileUpdateSuccess={props.isProfileUpdateSuccess}
+                         error={props.error}
+            />
             <PostsContainer />
         </div>
     )

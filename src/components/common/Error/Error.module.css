@@ -1,0 +1,12 @@
+.error {
+    position: absolute;
+    width: 400px;
+    padding: 30px ;
+    margin-left: -200px;
+    margin-top: -30px;
+    top: 50%;
+    left: 50%;
+
+    background-color: lightgrey;
+    color: red;
+}

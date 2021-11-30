@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
+import style from '../../common/FormControls/FormControl.module.css';
 
-const ProfileStatus = (props) => {
+const ProfileStatus = ({error, ...props}) => {
 
     const [editMode, setEditMode] = useState(false);
     const [status, setStatus] = useState(props.status);
@@ -28,10 +29,11 @@ const ProfileStatus = (props) => {
             { !editMode
                 ? <span onDoubleClick={activateEditMode}>{props.status || '...'}</span>
                 : <input onChange={onStatusChange}
-                         autoFocus={true}
-                         onBlur={deactivateEditMode}
-                         value={status}/>
+                           autoFocus={true}
+                           onBlur={deactivateEditMode}
+                           value={status}/>
             }
+            {error && <div className={style.form__common_error}>{error}</div>}
         </div>
     )
 }
