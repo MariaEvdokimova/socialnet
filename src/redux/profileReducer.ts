@@ -1,6 +1,7 @@
 import avatar from '../assets/images/avatar_snoopy.png';
 import {profileAPI, userAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {PostsType, ProfileType} from "../types/types";
 
 const ADD_NEW_POST = 'ADD_NEW_POST';
 const SET_PROFILE_INFO = 'SET_PROFILE_INFO'
@@ -13,14 +14,16 @@ const initialState = {
     posts: [
         {id: 1, text: 'Hello', likesCount: 0, avatar: avatar},
         {id: 2, text: 'yoyo', likesCount: 0, avatar: avatar}
-    ],
-    profile: null,
-    isProfileUpdateSuccess: '',
-    status: '',
-    error: null
+    ] as Array<PostsType>,
+    profile: null as ProfileType | null,
+    isProfileUpdateSuccess: '' as string,
+    status: '' as string,
+    error: null as string | null
 };
 
-const profileReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const profileReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case ADD_NEW_POST:
             return {
@@ -57,52 +60,87 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
-export const addPostText = (newPostText) => ({type: ADD_NEW_POST, newPostText});
-export const setProfileInfo = (profile) => ({type: SET_PROFILE_INFO, profile});
-export const setStatus = (status) => ({type: SET_STATUS, status});
-const setPhotoSuccess = (photos) => ({type: SET_PHOTO_SUCCESS, photos});
-const setProfileUpdateStatus = (status) => ({type: SET_PROFILE_UPDATE_STATUS, status});
-const setError = (error) => ({type: SET_ERROR, error});
+type AddPostTextActionType = {
+    type: typeof ADD_NEW_POST,
+    newPostText: string
+};
 
-export const getProfile = (userId) => {
-    return async (dispatch) => {
-        const data = await userAPI.getProfile(userId);
+export const addPostText = (newPostText: string): AddPostTextActionType => ({type: ADD_NEW_POST, newPostText});
+
+type SetProfileInfoActionType = {
+    type: typeof SET_PROFILE_INFO,
+    profile: ProfileType
+};
+
+export const setProfileInfo = (profile: ProfileType): SetProfileInfoActionType => ({type: SET_PROFILE_INFO, profile});
+
+type SetStatusActionType = {
+    type: typeof SET_STATUS,
+    status: string
+};
+
+export const setStatus = (status: string): SetStatusActionType => ({type: SET_STATUS, status});
+
+type SetPhotoSuccessActionType = {
+    type: typeof SET_PHOTO_SUCCESS,
+    photos: string
+};
+
+const setPhotoSuccess = (photos: string): SetPhotoSuccessActionType => ({type: SET_PHOTO_SUCCESS, photos});
+
+type SetProfileUpdateStatusActionType = {
+    type: typeof SET_PROFILE_UPDATE_STATUS,
+    status: string
+};
+
+const setProfileUpdateStatus = (status: string): SetProfileUpdateStatusActionType => ({type: SET_PROFILE_UPDATE_STATUS, status});
+
+type SetErrorActionType = {
+    type: typeof SET_ERROR,
+    error: string | null
+};
+
+const setError = (error: string | null): SetErrorActionType => ({type: SET_ERROR, error});
+
+export const getProfile = (userId: number) => {
+    return async (dispatch: any) => {
+        const data: any = await userAPI.getProfile(userId);
         dispatch(setProfileInfo(data));
     }
 };
 
-export const getUserStatus = (userId) => {
-    return async (dispatch) => {
-        const data = await profileAPI.getStatus(userId);
+export const getUserStatus = (userId: number) => {
+    return async (dispatch: any) => {
+        const data: any = await profileAPI.getStatus(userId);
         dispatch(setStatus(data))
     }
 };
 
-export const updateUserStatus = (status) => {
-    return async (dispatch) => {
+export const updateUserStatus = (status: string) => {
+    return async (dispatch: any) => {
         try {
-            const data = await profileAPI.setStatus(status);
+            const data: any = await profileAPI.setStatus(status);
             if (data.resultCode === 0) {
                 dispatch(setStatus(status))
             }
-        } catch (e) {
+        } catch (e: any) {
             dispatch(setError(e.message));
             setTimeout(()=>dispatch(setError(null)), 2000);
         }
     }
 };
 
-export const savePhoto = (photo) => {
-    return async (dispatch) => {
-        const data = await profileAPI.savePhoto(photo);
+export const savePhoto = (photo: string) => {
+    return async (dispatch: any) => {
+        const data: any = await profileAPI.savePhoto(photo);
         if (data.resultCode === 0) {
             dispatch(setPhotoSuccess(data.data.photos));
         }
     }
 }
 
-const profileErrors = (messages) => {
-    const keyMessages = messages.map((message) => {
+const profileErrors = (messages: any) => {
+    const keyMessages = messages.map((message: any) => {
         const key = message.match(/Contacts->(\w+)/)[1].toLowerCase();
         return {[key]: message};
     });
@@ -110,10 +148,10 @@ const profileErrors = (messages) => {
     return  Object.assign({}, ...keyMessages);
 };
 
-export const saveProfileData = (profile) => {
-    return async (dispatch, getState) => {
+export const saveProfileData = (profile: ProfileType) => {
+    return async (dispatch: any, getState: Function) => {
         const userId = getState().auth.userId;
-        const data = await profileAPI.saveProfile(profile);
+        const data: any = await profileAPI.saveProfile(profile);
         dispatch(setProfileUpdateStatus(''));
         if (data.resultCode === 0) {
             dispatch(getProfile(userId));

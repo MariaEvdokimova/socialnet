@@ -50,6 +50,7 @@ class App extends React.Component {
                             <Suspense fallback={<div>Loading...</div>}>
                                 <Switch>
                                     <Redirect exact from="/" to="/profile"/>
+                                    <Redirect exact from="/socialnet" to="/profile"/>
                                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                                     <Route path='*' render={() => <div>404 PAGE NOT FOUND</div>}/>
