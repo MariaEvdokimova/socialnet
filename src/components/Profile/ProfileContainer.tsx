@@ -1,11 +1,35 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {connect} from "react-redux";
 import {Profile} from "./Profile";
 import {getProfile, getUserStatus, savePhoto, saveProfileData, updateUserStatus} from "../../redux/profileReducer";
-import {withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
+import {ProfileType} from "../../types/types";
+import {AppStateType} from "../../redux/store";
 
-class ProfileContainer extends React.Component {
+type MapStateToPropsType = {
+    profile: ProfileType | null,
+    status: string,
+    isProfileUpdateSuccess: string,
+    authUserId: number | null,
+    error: string | null
+}
+
+type MapDispatchToPropsType = {
+    getProfile: (userId: number | null) => void,
+    getUserStatus: (userId: number) => void,
+    updateUserStatus: (status: string) => void,
+    savePhoto: (photo: string) => void,
+    saveProfileData: (profile: ProfileType) => void
+}
+
+type RouteInfo = {
+    userId: any//string | undefined
+}
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType & RouteComponentProps<RouteInfo>;
+
+class ProfileContainer extends React.Component<PropsType> {
 
     refreshProfile() {
         let userId = this.props.match.params.userId;
@@ -23,7 +47,7 @@ class ProfileContainer extends React.Component {
         this.refreshProfile();
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps: PropsType) {
         if(this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile();
         }
@@ -36,14 +60,14 @@ class ProfileContainer extends React.Component {
                         status={this.props.status}
                         updateUserStatus={this.props.updateUserStatus}
                         savePhoto={this.props.savePhoto}
-                        setProfileData={this.props.saveProfileData}
-                        profileUpdateStatus={this.props.isProfileUpdateSuccess}
+                        saveProfileData={this.props.saveProfileData}
+                        isProfileUpdateSuccess={this.props.isProfileUpdateSuccess}
                         error={this.props.error}
         />
     }
 }
 
-const mapStateToProps = (state) => (
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => (
     {
         profile: state.profilePage.profile,
         status: state.profilePage.status,

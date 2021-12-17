@@ -45,7 +45,7 @@ class App extends React.Component {
                     <Navbar/>
                     <div>
                         <Switch>
-                            <Route path='/users' render={() => <UsersContainer/>}/>
+                            <Route path='/users' render={() => <UsersContainer pageTitle='Users list'/>}/>
                             <Route path='/login' render={() => <LoginContainer/>}/>
                             <Suspense fallback={<div>Loading...</div>}>
                                 <Switch>

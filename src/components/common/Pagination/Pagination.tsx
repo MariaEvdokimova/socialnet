@@ -2,10 +2,18 @@ import React, {useState} from 'react';
 import styles from "./Pagination.module.css";
 import cn from 'classnames';
 
-const Pagination = ({totalItems, pageSize, currentPage, portionSize, onPageChange}) => {
+type PropsType = {
+    totalItems: number,
+    pageSize: number,
+    currentPage: number,
+    portionSize?: number,
+    onPageChange: (pageNumber: number) => void
+}
+
+const Pagination: React.FC<PropsType> = ({totalItems, pageSize, currentPage, portionSize = 10, onPageChange}) => {
 
     let countPages = Math.ceil(totalItems / pageSize);
-    let pages = [];
+    let pages: Array<number> = [];
 
     for (let i = 1; i <= countPages; i++) {
         pages.push(i);

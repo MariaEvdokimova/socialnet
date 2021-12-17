@@ -1,28 +1,19 @@
 import {getAuthUser} from "./authReducer";
-
-const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
-const GET_UNHANDLED_ERROR_MESSAGE = 'GET_UNHANDLED_ERROR_MESSAGE';
+import {BaseThunkType, InferActionsTypes} from "./store";
 
 const initialState = {
     initialized: false,
     errorMessage: null as string | null
 };
 
-export type InitialStateType = typeof initialState;
-
-type ActionType = {
-    type: string,
-    errorMessage: string
-}
-
 const appReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
-        case INITIALIZED_SUCCESS:
+        case 'SN/APP/INITIALIZED_SUCCESS':
             return {
                 ...state,
                 initialized: true
             }
-        case GET_UNHANDLED_ERROR_MESSAGE:
+        case 'SN/APP/GET_UNHANDLED_ERROR_MESSAGE':
             return {
                 ...state,
                 errorMessage: action.errorMessage
@@ -33,32 +24,33 @@ const appReducer = (state: InitialStateType = initialState, action: ActionType):
     }
 }
 
-type InitializedSuccessActionType = {
-    type: typeof INITIALIZED_SUCCESS
+export const actions = {
+    initializedSuccess: () => ({type: 'SN/APP/INITIALIZED_SUCCESS'} as const),
+    getUnhandledErrorMessage: (errorMessage: string | null) => ({
+        type: 'SN/APP/GET_UNHANDLED_ERROR_MESSAGE',
+        errorMessage
+    } as const)
 }
 
-type GetUnhandledErrorMessageActionType = {
-    type: typeof GET_UNHANDLED_ERROR_MESSAGE,
-    errorMessage: string | null
-}
-
-export const initializedSuccess = (): InitializedSuccessActionType => ({type: INITIALIZED_SUCCESS});
-const getUnhandledErrorMessage = (errorMessage: string | null): GetUnhandledErrorMessageActionType => ({type: GET_UNHANDLED_ERROR_MESSAGE, errorMessage});
-
-export const initializeApp = () => {
+export const initializeApp = (): ThunkActionType => {
     return (dispatch: Function) => {
         dispatch(getAuthUser())
             .then(() => {
-                dispatch(initializedSuccess())
+                dispatch(actions.initializedSuccess())
             });
     }
 }
 
-export const catchError = (errorMessage: string) => {
+export const catchError = (errorMessage: string): ThunkActionType => {
     return (dispatch: Function) => {
-        dispatch(getUnhandledErrorMessage(errorMessage))
-        setTimeout(() => dispatch(getUnhandledErrorMessage(null)), 2000);
+        dispatch(actions.getUnhandledErrorMessage(errorMessage))
+        setTimeout(() => dispatch(actions.getUnhandledErrorMessage(null)), 2000);
     }
 }
 
 export default appReducer;
+
+//types
+export type InitialStateType = typeof initialState;
+type ActionType = InferActionsTypes<typeof actions>;
+type ThunkActionType = BaseThunkType<ActionType, void>;

@@ -1,14 +1,5 @@
-const ADD_MESSAGE_TEXT = 'ADD_MESSAGE_TEXT';
-
-type DialogsType = {
-    id: number,
-    name: string
-};
-
-type MessageType = {
-    id: number,
-    text: string
-};
+import {DialogsType, MessageType} from "../types/types";
+import {InferActionsTypes} from "./store";
 
 const initialState = {
     dialogs: [
@@ -21,16 +12,9 @@ const initialState = {
     ] as Array<MessageType>
 };
 
-export type InitialStateType = typeof initialState;
-
-type ActionType = {
-    type: string,
-    newMessageText?: string
-};
-
 const dialogsReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
-        case ADD_MESSAGE_TEXT:
+        case 'SN/DIALOGS/ADD_MESSAGE_TEXT':
             let newMessages: any = {id: 6, text: action.newMessageText};
             return {
                 ...state,
@@ -41,11 +25,15 @@ const dialogsReducer = (state = initialState, action: ActionType): InitialStateT
     }
 };
 
-type SendMessageActionType = {
-    type: typeof ADD_MESSAGE_TEXT,
-    newMessageText: string
-};
-
-export const sendMessage = (newMessageText: string): SendMessageActionType => ({type: ADD_MESSAGE_TEXT, newMessageText});
+export const actions = {
+    sendMessage: (newMessageText: string) => ({
+        type: 'SN/DIALOGS/ADD_MESSAGE_TEXT',
+        newMessageText
+    } as const)
+}
 
 export default dialogsReducer;
+
+//types
+export type InitialStateType = typeof initialState;
+type ActionType = InferActionsTypes<typeof actions>;

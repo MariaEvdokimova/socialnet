@@ -27,9 +27,18 @@ export type ProfileType = {
     contacts?: ContactsType
 };
 export type UsersType = {
-    name?: string,
-    id?: number,
-    photos?: PhotosType,
-    status?: string | null,
-    followed?: boolean
+    id: number,
+    name: string,
+    photos: PhotosType,
+    status: string | null,
+    followed: boolean
 };
+export type DialogsType = {
+    id: number,
+    name: string
+};
+export type MessageType = {
+    id: number,
+    text: string
+};
+

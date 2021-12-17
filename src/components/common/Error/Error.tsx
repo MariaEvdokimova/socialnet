@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styles from './Error.module.css';
 
-const Error = ({errorMessage}) => {
+type PropsType = {
+    errorMessage: string
+};
+
+const Error: FC<PropsType> = ({errorMessage}) => {
     return (
         <div className={styles.error}>
             {'Caught: ' + errorMessage}

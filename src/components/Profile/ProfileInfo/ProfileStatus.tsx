@@ -1,7 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import style from '../../common/FormControls/FormControl.module.css';
 
-const ProfileStatus = ({error, ...props}) => {
+type PropsType = {
+    error: string,
+    status: string,
+    updateUserStatus: (newStatus: string) => void
+};
+
+const ProfileStatus: FC<PropsType> = ({error, ...props}) => {
 
     const [editMode, setEditMode] = useState(false);
     const [status, setStatus] = useState(props.status);
@@ -15,7 +21,7 @@ const ProfileStatus = ({error, ...props}) => {
         props.updateUserStatus(status);
     }
 
-    const onStatusChange = (e) => {
+    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setStatus(e.currentTarget.value);
     }
 
