@@ -5,6 +5,7 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {AppStateType} from "../../redux/store";
 import {DialogsType, MessageType} from "../../types/types";
+import React from "react";
 
 type MapStateToPropsType = {
     dialogs: Array<DialogsType>,
@@ -18,9 +19,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 };
 
-const sendMessage = actions.sendMessage;
-
-export default compose(
+export default compose<React.ComponentType>(
     withAuthRedirect,
-    connect(mapStateToProps, {sendMessage})
+    connect(mapStateToProps, {sendMessage: actions.sendMessage})
 )(Dialogs);

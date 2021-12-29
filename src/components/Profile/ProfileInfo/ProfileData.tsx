@@ -1,8 +1,15 @@
 import React from 'react';
 import classes from "./ProfileInfo.module.css";
 import ProfileInfoContacts from "./ProfileInfoContacts/ProfileInfoContacts";
+import {ProfileType} from "../../../types/types";
 
-const ProfileData = ({isOwner, profile, onEditMode}) => {
+type PropsType = {
+    isOwner: boolean,
+    profile: ProfileType,
+    onEditMode: () => void
+}
+
+const ProfileData: React.FC<PropsType> = ({isOwner, profile, onEditMode}) => {
 
     return (
         <div className={classes.profile__desc}>
@@ -10,7 +17,6 @@ const ProfileData = ({isOwner, profile, onEditMode}) => {
                 isOwner && <button onClick={onEditMode}>Edit profile</button>
             }
             <div className={classes.profile__name}>{profile.fullName}</div>
-            <div className={classes.profile__about}>{profile.aboutMe}</div>
             <ProfileInfoContacts contacts={profile.contacts}/>
 
             {profile.lookingForAJob && <div>

@@ -10,7 +10,7 @@ const initialState = {
         {id: 1, text: 'Hello', likesCount: 0, avatar: avatar},
         {id: 2, text: 'yoyo', likesCount: 0, avatar: avatar}
     ] as Array<PostsType>,
-    profile: null as ProfileType | null,
+    profile: {} as ProfileType,//null as ProfileType | null,
     isProfileUpdateSuccess: '',
     status: '',
     error: null as string | null

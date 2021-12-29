@@ -8,7 +8,7 @@ import {ProfileType} from "../../types/types";
 import {AppStateType} from "../../redux/store";
 
 type MapStateToPropsType = {
-    profile: ProfileType | null,
+    profile: ProfileType,
     status: string,
     isProfileUpdateSuccess: string,
     authUserId: number | null,
@@ -19,12 +19,12 @@ type MapDispatchToPropsType = {
     getProfile: (userId: number | null) => void,
     getUserStatus: (userId: number) => void,
     updateUserStatus: (status: string) => void,
-    savePhoto: (photo: string) => void,
+    savePhoto: (photo: File) => void,
     saveProfileData: (profile: ProfileType) => void
 }
 
 type RouteInfo = {
-    userId: any//string | undefined
+    userId: string
 }
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType & RouteComponentProps<RouteInfo>;
@@ -32,7 +32,7 @@ type PropsType = MapStateToPropsType & MapDispatchToPropsType & RouteComponentPr
 class ProfileContainer extends React.Component<PropsType> {
 
     refreshProfile() {
-        let userId = this.props.match.params.userId;
+        let userId: number | null = +this.props.match.params.userId;
         if(!userId) {
             userId = this.props.authUserId;
             if (!userId) {
@@ -40,7 +40,7 @@ class ProfileContainer extends React.Component<PropsType> {
             }
         }
         this.props.getProfile(userId);
-        this.props.getUserStatus(userId);
+        this.props.getUserStatus(userId as number);
     }
 
     componentDidMount() {
@@ -77,7 +77,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => (
     }
 );
 
-export default compose(
+export default compose<React.ComponentType>(
     connect(mapStateToProps, {getProfile, getUserStatus, updateUserStatus, savePhoto, saveProfileData}),
     withRouter
 )(ProfileContainer);

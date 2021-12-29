@@ -7,18 +7,28 @@ import youtube from '../../../../assets/images/YouTube.png';
 import instagram from '../../../../assets/images/Instagram.png';
 import github from '../../../../assets/images/github.png';
 import mainLink from '../../../../assets/images/main link.png';
+import {ContactsType} from "../../../../types/types";
 
-const ProfileInfoContacts = ({contacts}) => {
+type PropsType = {
+    contacts: ContactsType
+}
+
+const ProfileInfoContacts: React.FC<PropsType> = ({contacts}) => {
 
     const linksImg = {facebook, website, vk, twitter, instagram, youtube, github, mainLink};
 
-    return Object.keys(contacts).map(key => {
-        return <a key={key} href={contacts[key]}>
-            {
-                contacts[key] && <img src={linksImg[key]} alt='link' width='30px'/>
-            }
-        </a>
-    })
+    return <div>
+        { contacts &&
+        Object.keys(contacts).map(key => {
+            return <a key={key} href={contacts[key as keyof ContactsType]}>
+                {
+                    contacts[key as keyof ContactsType] &&
+                    <img src={linksImg[key as keyof ContactsType]} alt='link' width='30px'/>
+                }
+            </a>
+        })
+    }
+    </div>
 }
 
 export default ProfileInfoContacts;

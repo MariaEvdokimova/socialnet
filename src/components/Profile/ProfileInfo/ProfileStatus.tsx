@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import style from '../../common/FormControls/FormControl.module.css';
 
 type PropsType = {
-    error: string,
+    error: string | null,
     status: string,
     updateUserStatus: (newStatus: string) => void
 };

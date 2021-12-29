@@ -4,13 +4,13 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {ProfileType} from "../../types/types";
 
 type PropsType = {
-    profile: ProfileType | null,
+    profile: ProfileType,
     status: string,
     isProfileUpdateSuccess: string,
     error: string | null,
     isOwner: boolean
     updateUserStatus: (status: string) => void,
-    savePhoto: (photo: string) => void,
+    savePhoto: (photo: File) => void,
     saveProfileData: (profile: ProfileType) => void
 }
 

@@ -6,6 +6,7 @@ import {InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {createField, Textarea} from "../common/FormControls/FormControls";
 import {DialogsType, MessageType} from "../../types/types";
+import {InitialStateType} from "../../redux/dialogsReducer";
 
 const maxLength = maxLengthCreator(30);
 
@@ -20,7 +21,7 @@ const DialogsForm: FC<InjectedFormProps<FormDataType>> = (props) => {
 
 const DialogsReduxForm = reduxForm<FormDataType>({form: 'dialogs'})(DialogsForm);
 
-type DialogsPropsType = {
+type PropsType = {
     dialogs: Array<DialogsType>,
     messages: Array<MessageType>,
     sendMessage: (messageText: string) => void
@@ -32,7 +33,7 @@ type FormDataType = {
 
 type FormDataKey = Extract<keyof FormDataType, string>;
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs: FC<PropsType> = (props) => {
 
     const addNewMessage = (formData: FormDataType) => {
         props.sendMessage(formData.newMessageText);

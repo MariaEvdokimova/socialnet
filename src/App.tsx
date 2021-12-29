@@ -9,16 +9,22 @@ import {connect, Provider} from 'react-redux';
 import {compose} from "redux";
 import {catchError, initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
-import store from "./redux/store";
+import store, {AppStateType} from "./redux/store";
 import Error from "./components/common/Error/Error";
 //import DialogsContainer from "./components/Dialogs/DialogsContainer";
 //import ProfileContainer from "./components/Profile/ProfileContainer";
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
 
-class App extends React.Component {
+type MapPropsType = ReturnType<typeof mapStateToProps>;
+type DispatchPropsType = {
+    initializeApp: () => void,
+    catchError: (reason: string) => void
+}
 
-    catchAllUnhandledErrors = (event) => {
+class App extends React.Component<MapPropsType & DispatchPropsType> {
+
+    catchAllUnhandledErrors = (event: PromiseRejectionEvent) => {
         this.props.catchError(event.reason);
     }
 
@@ -64,12 +70,12 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized,
     errorMessage: state.app.errorMessage
 })
 
-const AppContainer = compose(
+const AppContainer = compose<React.ComponentType>(
     withRouter,
     connect(mapStateToProps, {initializeApp, catchError})
 )(App);
