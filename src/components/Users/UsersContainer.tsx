@@ -1,6 +1,7 @@
 import Users from "./Users";
 import {connect} from "react-redux";
 import {
+    FilterType,
     follow,
     requestUsers,
     unfollow
@@ -8,7 +9,7 @@ import {
 import React from "react";
 import Preloader from "../common/Preloader/Preloader";
 import {
-    getCurrentPage,
+    getCurrentPage, getFilter,
     getIsFetching,
     getPageSize, getportionSize,
     getTotalUsers, getUsers,
@@ -25,12 +26,13 @@ type MapStateToPropsType = {
     portionSize: number,
     users: Array<UsersType>,
     usersFollowInProgress: Array<number>,
+    filter: FilterType
 };
 
 type MapDispatchToPropsType = {
     unfollow: (userId: number) => void,
     follow: (userId: number) => void,
-    requestUsers: (page: number, pageSize: number) => void
+    requestUsers: (page: number, pageSize: number, filter: FilterType) => void
 };
 
 type OwnPropsType = {
@@ -42,11 +44,16 @@ type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType;
 class UsersContainer extends React.Component<PropsType> {
 
     componentDidMount () {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize);
+        const {currentPage, pageSize, filter} = this.props;
+        this.props.requestUsers(currentPage, pageSize, filter);
     }
 
     onPageChange = (page: number) => {
-        this.props.requestUsers(page, this.props.pageSize);
+        this.props.requestUsers(page, this.props.pageSize, this.props.filter);
+    }
+
+    onFilterChanged = (filter: FilterType) => {
+        this.props.requestUsers(1, this.props.pageSize, filter);
     }
 
     render () {
@@ -63,6 +70,7 @@ class UsersContainer extends React.Component<PropsType> {
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
                 portionSize={this.props.portionSize}
+                onFilterChanged={this.onFilterChanged}
             />
         </>
     }
@@ -87,7 +95,8 @@ const mapStateToProps = (state: AppStateType) => {
         pageSize: getPageSize(state),
         isFetching: getIsFetching(state),
         usersFollowInProgress: getUsersFollowInProgress(state),
-        portionSize: getportionSize(state)
+        portionSize: getportionSize(state),
+        filter: getFilter(state)
     }
 };
 

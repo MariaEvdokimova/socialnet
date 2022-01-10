@@ -7,3 +7,4 @@ export const getPageSize = (state: AppStateType) => state.usersPage.pageSize;
 export const getIsFetching = (state: AppStateType) => state.usersPage.isFetching;
 export const getUsersFollowInProgress = (state: AppStateType) => state.usersPage.usersFollowInProgress;
 export const getportionSize = (state: AppStateType) => state.usersPage.portionSize;
+export const getFilter = (state: AppStateType) => state.usersPage.filter;

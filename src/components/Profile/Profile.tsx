@@ -4,7 +4,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {ProfileType} from "../../types/types";
 
 type PropsType = {
-    profile: ProfileType,
+    profile: ProfileType | null,
     status: string,
     isProfileUpdateSuccess: string,
     error: string | null,

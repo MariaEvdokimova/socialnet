@@ -10,7 +10,7 @@ const initialState = {
         {id: 1, text: 'Hello', likesCount: 0, avatar: avatar},
         {id: 2, text: 'yoyo', likesCount: 0, avatar: avatar}
     ] as Array<PostsType>,
-    profile: {} as ProfileType,//null as ProfileType | null,
+    profile: null as ProfileType | null, //{} as ProfileType,//
     isProfileUpdateSuccess: '',
     status: '',
     error: null as string | null
@@ -36,7 +36,7 @@ const profileReducer = (state = initialState, action: ActionType): InitialStateT
         case 'SN/PROFILE/SET_PHOTO_SUCCESS':
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos}
+                profile: {...state.profile, photos: action.photos} as ProfileType
             }
         case 'SN/PROFILE/SET_PROFILE_UPDATE_STATUS':
             return {

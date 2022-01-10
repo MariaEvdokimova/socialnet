@@ -8,7 +8,7 @@ import {ProfileType} from "../../types/types";
 import {AppStateType} from "../../redux/store";
 
 type MapStateToPropsType = {
-    profile: ProfileType,
+    profile: ProfileType | null,
     status: string,
     isProfileUpdateSuccess: string,
     authUserId: number | null,

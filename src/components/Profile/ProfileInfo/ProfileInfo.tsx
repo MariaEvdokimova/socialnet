@@ -10,7 +10,7 @@ import ProfileDataForm, {FormDataType} from './ProfileDataForm';
 
 type PropsType = {
     isOwner: boolean,
-    profile: ProfileType,
+    profile: ProfileType | null,
     status: string,
     isProfileUpdateSuccess: string,
     error: string | null,
